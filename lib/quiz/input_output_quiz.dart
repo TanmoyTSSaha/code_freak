@@ -1,20 +1,25 @@
-import 'package:code_freak_2/components/question_controller.dart';
 import 'package:code_freak_2/constant.dart';
-import 'package:code_freak_2/questions/questions.dart';
+import 'package:code_freak_2/quiz_questions/input_output_question.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../controller/input_output_question_controller.dart';
 
-class Quiz extends StatelessWidget {
-  const Quiz({Key? key}) : super(key: key);
+class InputOutputQuiz extends StatelessWidget {
+  const InputOutputQuiz({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    QuestionController _questionController = Get.put(QuestionController());
-    QuestionController _controller = Get.put(QuestionController());
+    InputOutputQuestionController _questionController =
+        Get.put(InputOutputQuestionController());
+    InputOutputQuestionController _controller =
+        Get.put(InputOutputQuestionController());
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+              _questionController.resetQuestionNumber();
+            },
             icon: const Icon(Icons.arrow_back, color: Colors.black)),
         centerTitle: true,
         title: Text(
@@ -104,43 +109,46 @@ class QuestionCard extends StatelessWidget {
     required this.question,
   }) : super(key: key);
 
-  final Question question;
+  final InputOutputQuestion question;
 
   @override
   Widget build(BuildContext context) {
-    QuestionController _controller = Get.put(QuestionController());
-    return Container(
-      margin: const EdgeInsets.symmetric(
-          horizontal: kDefaultPadding), // this is the margin for quiz card.
-      padding: const EdgeInsets.all(kDefaultPadding),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: <Color>[
-            Color(0xFF011C40),
-            Color(0xFF023059),
+    InputOutputQuestionController _controller =
+        Get.put(InputOutputQuestionController());
+    return SingleChildScrollView(
+      child: Container(
+        margin: const EdgeInsets.symmetric(
+            horizontal: kDefaultPadding), // this is the margin for quiz card.
+        padding: const EdgeInsets.all(kDefaultPadding),
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: <Color>[
+              Color(0xFF011C40),
+              Color(0xFF023059),
+            ],
+          ),
+          borderRadius: BorderRadius.circular(25),
+        ),
+        child: Column(
+          children: [
+            Text(
+              question.questions,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline6!
+                  .copyWith(color: Colors.white),
+            ),
+            const SizedBox(height: kDefaultPadding / 2),
+            ...List.generate(
+              question.options.length,
+              (index) => Option(
+                text: question.options[index],
+                index: index,
+                press: () => _controller.checkAns(question, index),
+              ),
+            ),
           ],
         ),
-        borderRadius: BorderRadius.circular(25),
-      ),
-      child: Column(
-        children: [
-          Text(
-            question.questions,
-            style: Theme.of(context)
-                .textTheme
-                .headline6!
-                .copyWith(color: Colors.white),
-          ),
-          const SizedBox(height: kDefaultPadding / 2),
-          ...List.generate(
-            question.options.length,
-            (index) => Option(
-              text: question.options[index],
-              index: index,
-              press: () => _controller.checkAns(question, index),
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -159,8 +167,8 @@ class Option extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<QuestionController>(
-        init: QuestionController(),
+    return GetBuilder<InputOutputQuestionController>(
+        init: InputOutputQuestionController(),
         builder: (qnController) {
           Color getTheRightColor() {
             if (qnController.isAnswered) {
@@ -236,8 +244,8 @@ class ProgressBar extends StatelessWidget {
         border: Border.all(color: Colors.black, width: 3),
         borderRadius: BorderRadius.circular(50),
       ),
-      child: GetBuilder<QuestionController>(
-          init: QuestionController(),
+      child: GetBuilder<InputOutputQuestionController>(
+          init: InputOutputQuestionController(),
           builder: (controller) {
             return Stack(
               children: [

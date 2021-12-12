@@ -1,3 +1,4 @@
+import 'package:code_freak_2/quiz/input_output_quiz.dart';
 import 'package:code_freak_2/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -28,20 +29,32 @@ class BasicInputOutPut extends StatelessWidget {
       elevation: 0,
       centerTitle: true,
       title: const Text(
-        "Basic",
+        "Basic Input Output",
         style: TextStyle(
           color: Colors.black,
         ),
       ),
-      leading: GestureDetector(
-        onTap: () {
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back, color: Colors.black),
+        onPressed: () {
           Navigator.pop(context);
         },
-        child: const Icon(
-          Icons.arrow_back,
-          color: Colors.black,
-        ),
       ),
+      actions: [
+        TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const InputOutputQuiz(),
+                ),
+              );
+            },
+            child: const Text(
+              "QUIZ",
+              style: TextStyle(color: Colors.black, fontSize: 15),
+            ))
+      ],
     );
   }
 }

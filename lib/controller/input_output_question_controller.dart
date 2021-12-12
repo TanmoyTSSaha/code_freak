@@ -1,11 +1,11 @@
-import 'package:code_freak_2/components/score_screen.dart';
-import 'package:code_freak_2/questions/questions.dart';
+import 'package:code_freak_2/quiz_questions/input_output_question.dart';
+import 'package:code_freak_2/score/input_output_score_screen.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/widgets.dart';
 
-class QuestionController extends GetxController
+class InputOutputQuestionController extends GetxController
     with SingleGetTickerProviderMixin {
   late AnimationController _animationController;
   late Animation _animation;
@@ -14,9 +14,9 @@ class QuestionController extends GetxController
   late PageController _pageController;
   PageController get pageController => _pageController;
 
-  final List<Question> _question = sample_data
+  final List<InputOutputQuestion> _question = sample_data
       .map(
-        (question) => Question(
+        (question) => InputOutputQuestion(
           id: question['id'],
           questions: question['question'],
           options: question['options'],
@@ -25,7 +25,7 @@ class QuestionController extends GetxController
       )
       .toList();
 
-  List<Question> get questions => _question;
+  List<InputOutputQuestion> get questions => _question;
 
   bool _isAnswered = false;
   bool get isAnswered => _isAnswered;
@@ -65,7 +65,7 @@ class QuestionController extends GetxController
     _pageController.dispose();
   }
 
-  void checkAns(Question question, int selectedIndex) {
+  void checkAns(InputOutputQuestion question, int selectedIndex) {
     _isAnswered = true;
     _correctAns = question.answer;
     _selectedAns = selectedIndex;
@@ -85,11 +85,18 @@ class QuestionController extends GetxController
     );
   }
 
+  void resetQuestionNumber() => _questionNumber.value = 1;
+
   void nextQuestion() {
     if (_questionNumber.value != _question.length) {
       _isAnswered = false;
       _pageController.nextPage(
           duration: const Duration(milliseconds: 250), curve: Curves.ease);
+
+      // to reset the questions after exiting the quiz page
+      _pageController.addListener(() {
+        _questionNumber.value = _pageController.page!.round() + 1;
+      });
 
       //reset the counter.
       _animationController.reset();
@@ -97,7 +104,7 @@ class QuestionController extends GetxController
       //then start it again.
       _animationController.forward().whenComplete(nextQuestion);
     } else {
-      Get.to(() => const ScoreScreen());
+      Get.to(() => const InputOutputScoreScreen());
     }
   }
 

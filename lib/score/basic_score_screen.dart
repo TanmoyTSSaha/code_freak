@@ -1,4 +1,4 @@
-import 'package:code_freak_2/components/question_controller.dart';
+import 'package:code_freak_2/controller/basic_question_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

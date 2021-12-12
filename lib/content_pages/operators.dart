@@ -1,4 +1,5 @@
 import 'package:code_freak_2/constant.dart';
+import 'package:code_freak_2/quiz/operator_quiz.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -33,15 +34,27 @@ class Operators extends StatelessWidget {
           color: Colors.black,
         ),
       ),
-      leading: GestureDetector(
-        onTap: () {
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back, color: Colors.black),
+        onPressed: () {
           Navigator.pop(context);
         },
-        child: const Icon(
-          Icons.arrow_back,
-          color: Colors.black,
-        ),
       ),
+      actions: [
+        TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const OperatorQuiz(),
+                ),
+              );
+            },
+            child: const Text(
+              "QUIZ",
+              style: TextStyle(color: Colors.black, fontSize: 15),
+            ))
+      ],
     );
   }
 }

@@ -5,7 +5,6 @@ import 'package:code_freak_2/content_pages/basic.dart';
 import 'package:code_freak_2/content_pages/basic_input_output.dart';
 import 'package:code_freak_2/content_pages/operators.dart';
 import 'package:flutter/material.dart';
-// import 'topics.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
@@ -87,56 +86,112 @@ class Body extends StatelessWidget {
                     ),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Basic(),
+                        ),
+                      );
+                    },
                     child: const CatagoryCard(
                       title: "String",
                       // press: () {},
                     ),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const BasicInputOutPut(),
+                        ),
+                      );
+                    },
                     child: const CatagoryCard(
                       title: "Functions",
                       // press: () {},
                     ),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Operators(),
+                        ),
+                      );
+                    },
                     child: const CatagoryCard(
                       title: "Pointers & References",
                       // press: () {},
                     ),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Arrays(),
+                        ),
+                      );
+                    },
                     child: const CatagoryCard(
                       title: "Object Oriented Programming",
                       // press: () {},
                     ),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Basic(),
+                        ),
+                      );
+                    },
                     child: const CatagoryCard(
                       title: "Constructors & Destructors",
                       // press: () {},
                     ),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const BasicInputOutPut(),
+                        ),
+                      );
+                    },
                     child: const CatagoryCard(
                       title: "Exception Handling",
                       // press: () {},
                     ),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Operators(),
+                        ),
+                      );
+                    },
                     child: const CatagoryCard(
                       title: "File Handling",
                       // press: () {},
                     ),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Arrays(),
+                        ),
+                      );
+                    },
                     child: const CatagoryCard(
                       title: "Standard Template Library (STL)",
                     ),

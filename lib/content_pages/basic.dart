@@ -1,4 +1,4 @@
-import 'package:code_freak_2/components/quiz.dart';
+import 'package:code_freak_2/quiz/basic_quiz.dart';
 import 'package:code_freak_2/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -32,14 +32,11 @@ class Basic extends StatelessWidget {
         "Basic",
         style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
       ),
-      leading: GestureDetector(
-        onTap: () {
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back, color: Colors.black),
+        onPressed: () {
           Navigator.pop(context);
         },
-        child: const Icon(
-          Icons.arrow_back,
-          color: Colors.black,
-        ),
       ),
       actions: [
         TextButton(
@@ -47,7 +44,7 @@ class Basic extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const Quiz(),
+                  builder: (context) => const BasicQuiz(),
                 ),
               );
             },

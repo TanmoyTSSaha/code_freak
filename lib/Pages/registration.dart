@@ -117,8 +117,8 @@ class _RegistrationState extends State<Registration> {
                                     borderRadius: BorderRadius.circular(50)),
                                 prefixIcon: const Icon(Icons.person_outline)),
                             validator: (String? value) {
-                              if (value != null && value.length < 8) {
-                                return "Password must be atleast of 8 characters";
+                              if (value != null && value.length < 6) {
+                                return "Password must be atleast of 6 characters";
                               } else if (value!.isEmpty) {
                                 return "Password cannot be empty";
                               }
